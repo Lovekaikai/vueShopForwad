@@ -14,6 +14,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    div{
+        background: red;
+    }
 </style>
