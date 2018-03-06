@@ -30,7 +30,7 @@ const shopCart=[
 ]
 
 const goods=[
-  { name: 'Detail', path: 'goods/Detail', component: Detail },
+  { name: 'Detail', path: 'goods/Detail/:id', component: Detail },
   { name: 'List', path: 'goods/List', component: List }
 ]
 
@@ -49,3 +49,4 @@ export default new Router({
     }
   ]
 })
+
