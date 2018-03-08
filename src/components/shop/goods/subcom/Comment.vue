@@ -7,13 +7,13 @@
             <el-tab-pane label="配置管理">
                 <div class="comment-box">
                     <!--取得评论总数-->
-                    <form id="commentForm" name="commentForm" class="form-box" url="/tools/submit_ajax.ashx?action=comment_add&amp;channel_id=2&amp;article_id=98">
+                    <form id="commentForm" @submit.prevent="commentContent" name="commentForm" class="form-box" url="/tools/submit_ajax.ashx?action=comment_add&amp;channel_id=2&amp;article_id=98">
                         <div class="avatar-box">
                             <i class="iconfont icon-user-full"></i>
                         </div>
                         <div class="conn-box">
                             <div class="editor">
-                                <textarea id="txtContent" name="txtContent" sucmsg=" " datatype="*10-1000" nullmsg="请填写评论内容！"></textarea>
+                                <textarea v-model= "commenttxt.commenttxt" id="txtContent" name="txtContent" sucmsg=" " datatype="*10-1000" nullmsg="请填写评论内容！"></textarea>
                                 <span class="Validform_checktip"></span>
                             </div>
                             <div class="subcon">
@@ -65,7 +65,11 @@
                  },
                  totalcount:10,
                  pageIndex:1,
-                 pageSize:10
+                 pageSize:1,
+                 commenttxt:{
+                        "commenttxt":"评论内容"  
+                }
+                 
 
             }
         },
@@ -80,7 +84,7 @@
              getGodsDetail() {
                 this.$http.get(this.$api.goodsDetail + this.id).then(res => {
                     this.top = res.data.message;
-                    console.log(this.top)
+                    // console.log(this.top)
                 });
             },
              handleSizeChange(val){
@@ -91,6 +95,13 @@
                 this.currentPage=val;
                 this.getComment()
             },
+            commentContent(){
+                let url=`${this.$api.comment}goods/${this.id}`;
+                this.$http.post(url,this.commenttxt).then((res)=>{
+                    this.$alert('添加成功');
+                    this.$router.push({path:this.$route.path})
+                })
+            }
         },
         watch:{
             id(){
@@ -100,7 +111,8 @@
         },
         created () {
             this.getGodsDetail();
-            this.getComment()
+            this.getComment();
+            console.log(this.$route)
         }
     }
 </script>

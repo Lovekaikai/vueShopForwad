@@ -77,7 +77,7 @@
                                         <dt>购买数量</dt>
                                         <dd>
                                             <div class="stock-box">
-                                                <el-input-number :min="0" v-model="num3" :step="1"></el-input-number>
+                                                <el-input-number :min="0"   v-model="num3" ></el-input-number>
 
                                             </div>
                                             <span class="stock-txt">
@@ -90,7 +90,7 @@
                                         <dd>
                                             <div class="btn-buy" id="buyButton">
                                                 <button class="buy" onclick="cartAdd(this,'/',1,'/shopping.html');">立即购买</button>
-                                                <button class="add" onclick="cartAdd(this,'/',0,'/cart.html');">加入购物车</button>
+                                                <button class="add" @click="handleChange">加入购物车</button>
                                             </div>
                                         </dd>
                                     </dl>
@@ -133,9 +133,7 @@ export default {
         imglist: [],
         goodsinfo: {}
       },
-
       num3: 1,
-
     };
   },
   components: {
@@ -148,12 +146,17 @@ export default {
     getGodsDetail() {
       this.$http.get(this.$api.goodsDetail + this.id).then(res => {
         this.top = res.data.message;
-        console.log(this.top)
+        // console.log(this.top)
       });
+    },
+    handleChange(val){
+        let numAll=this.num3+(this.$store.state.cart[this.id]|| 0)
+        this.$store.commit("changNum",{id:this.id,num:numAll})
     }
   },
   created() {
     this.getGodsDetail();
+   
   },
   watch: {
     $route() {

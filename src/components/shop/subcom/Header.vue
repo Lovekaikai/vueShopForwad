@@ -12,9 +12,9 @@
                     <a href="/register.html">注册</a>
                     <strong>|</strong>
                     <a><i class="iconfont icon-phone"></i>联系我们</a>
-                    <router-link :to="{ name: 'shopcart' }">
+                    <router-link :to="{ name: 'ShopCart' }">
                         <i class="iconfont icon-cart"></i>
-                        <span>购物车(100)</span>
+                        <span>购物车({{$store.getters.totalNum}})</span>
                     </router-link>
                 </div>
             </div>

@@ -35,11 +35,9 @@ const goods=[
 ]
 
 
-
-
 Vue.use(Router)
 
-export default new Router({
+let router= new Router({
   routes: [
     {
       name:'Login',path:'/Login',component:Login
@@ -49,4 +47,34 @@ export default new Router({
     }
   ]
 })
+
+
+// router.beforeEach((to, from, next) => {
+
+
+//   Vue.prototype.$http.get(Vue.prototype.$api.isLogin).then((res)=>{
+//       let isLogin=false;
+//         if(res.code==='logined'){
+//             isLogin=true;
+//         }
+
+
+        
+
+
+
+
+
+//   })
+// })
+
+
+
+export default router;
+
+
+
+
+
+
 
